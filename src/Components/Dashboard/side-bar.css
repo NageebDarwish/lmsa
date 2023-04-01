@@ -1,0 +1,15 @@
+.active {
+  background-color: #007bff !important;
+  color: white !important;
+}
+.custom-a {
+  display: flex;
+  align-items: center;
+}
+.custom-link {
+  color: black !important;
+  background-color: inherit !important;
+}
+.custom-link:hover {
+  color: rgb(71, 71, 71) !important;
+}

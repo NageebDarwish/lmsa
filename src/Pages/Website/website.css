@@ -1,0 +1,54 @@
+@media (min-width: 768px) {
+  .home-page {
+    height: 80vh;
+  }
+}
+
+.home-page img {
+  max-width: 100%;
+  max-height: 80vh;
+}
+.btn-custom {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border-radius: 18px !important;
+}
+.btn-custom svg {
+  padding: 15px 10px;
+}
+.btn-custom span {
+  padding: 0 10px;
+  font-size: 13px;
+}
+.custom-box-shadow {
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: 0.3s;
+}
+.custom-box-shadow:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+.custom-line-2::before {
+  content: "";
+  width: 120px;
+  height: 3px;
+  background-color: black;
+  opacity: 0.77;
+
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.contact input,
+.contact textarea {
+  border-radius: 22px;
+}
+.custom-opacity {
+  opacity: 0.77;
+}
+
+.custom-an:hover {
+  background-color: inherit !important;
+}

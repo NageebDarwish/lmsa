@@ -1,0 +1,33 @@
+.custom-ul li {
+  padding-left: 3rem;
+  font-weight: 700;
+  color: #726a6a !important;
+  padding: 1.4rem 0rem 1.4rem 3rem;
+}
+.custom-ul li a {
+  color: #726a6a !important;
+  background-color: inherit !important;
+  padding: 1.3rem 0;
+}
+.custom-ul li a:hover {
+  color: var(--primary-color) !important;
+  background-color: inherit !important;
+}
+.custom-ul li .active {
+  color: var(--primary-color) !important;
+  position: relative;
+}
+.custom-ul li .active::before {
+  content: "";
+  background-color: var(--primary-color);
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    padding: 1rem 0 !important;
+  }
+}

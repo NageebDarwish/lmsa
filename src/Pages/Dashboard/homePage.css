@@ -1,0 +1,18 @@
+.custom-line::after {
+  content: "";
+  height: 3px;
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  background-color: black;
+  width: 40px;
+}
+.custom-line::before {
+  content: "";
+  height: 3px;
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  background-color: white;
+  width: 120px;
+}

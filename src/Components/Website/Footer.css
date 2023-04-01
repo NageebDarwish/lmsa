@@ -1,0 +1,25 @@
+footer a:hover {
+  background-color: inherit !important;
+}
+footer li {
+  color: #ffffff;
+}
+footer a {
+  font-weight: normal;
+}
+footer a span {
+  padding-right: 10px;
+}
+footer {
+  background-color: #1c1c1c !important;
+}
+
+.sec-footer {
+  font-size: 14px;
+}
+@media (max-width: 768px) {
+  .sec-footer {
+    font-size: 12px;
+    text-align: center;
+  }
+}

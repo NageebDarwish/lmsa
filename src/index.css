@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  font-family: "Noto Kufi Arabic", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  direction: rtl;
+  background-color: #f6f6f6 !important;
+}
+
+code {
+  font-family: "Noto Kufi Arabic", sans-serif;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+a {
+  text-decoration: none !important;
+  color: rgb(219, 218, 218) !important;
+  font-weight: bold;
+  transition: 0.3s;
+  border-radius: 12px;
+}
+a:hover {
+  color: white !important;
+  background-color: rgb(134, 134, 134);
+}
+
+.icon-size {
+  font-size: 25px;
+}
+:root {
+  --se-color: #1c1c1c;
+  --primary-color: ;
+}
+.se-color {
+  color: var(--se-color);
+  opacity: 0.77;
+}
+.err {
+  color: rgb(241, 37, 37);
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 13px 0px var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
