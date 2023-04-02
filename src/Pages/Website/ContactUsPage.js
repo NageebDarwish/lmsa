@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { baseUrl } from "../../Api/Api";
+import LoadingWebsite from "../../Components/Loading/LoadingWebsite";
 
 export default function ContactUsPage() {
   const [contactDescrption, setContactDescription] = useState("");
 
   const [mapShow, setMapShow] = useState([]);
+
+  const [loading, setLoading] = useState(true);
 
   const [form, setForm] = useState({
     name: "",
@@ -35,7 +38,8 @@ export default function ContactUsPage() {
         setEmail(data[0].email);
         setLocation(data[0].website);
         setPhone(data[0].phone);
-      });
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   //   Map
@@ -63,68 +67,74 @@ export default function ContactUsPage() {
 
   return (
     <div className="container-md container-fluid">
-      <section
-        className="mt-5 contact d-flex flex-wrap align-items-center justify-content-between"
-        style={{ minHeight: "80vh" }}
-      >
-        <div className="col-12 col-md-6">
-          <h1 className="mb-3 fw-bold position-relative custom-line">
-            اتصل بنا
-          </h1>
-          <p className="fw-bold se-color">{contactDescrption}</p>
+      {loading ? (
+        <LoadingWebsite />
+      ) : (
+        <>
+          <section
+            className="mt-5 contact d-flex flex-wrap align-items-center justify-content-between"
+            style={{ minHeight: "80vh" }}
+          >
+            <div className="col-12 col-md-6">
+              <h1 className="mb-3 fw-bold position-relative custom-line">
+                اتصل بنا
+              </h1>
+              <p className="fw-bold se-color">{contactDescrption}</p>
 
-          <input
-            type="text"
-            name="name"
-            className="form-control p-3 mb-3"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="الاسم الكامل..."
-          />
-          <input
-            type="text"
-            name="email"
-            className="form-control p-3 mb-3"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="البريد الالكتروني او رقم الهاتف..."
-          />
-          <textarea
-            name="message"
-            className="form-control p-3 mb-3"
-            value={form.message}
-            onChange={handleChange}
-            placeholder="الرسالة..."
-            rows="7"
-          />
-        </div>
-        <div className="col-md-5 col-12">{MapShowOnPage}</div>
-      </section>
-      <section className="my-3 d-flex align-items-center flex-wrap justify-content-between">
-        <div className="col-12 col-md-6 col-lg-4 flex-column flex-md-row d-flex align-items-center justify-content-start">
-          <img src={require("../../Asset/Layer_17.png")} alt="email" />
-          <div>
-            <h4 className="fw-bold me-3 text-md-end text-center mt-md-0 my-2">
-              موقعنا
-            </h4>
-            <p className="fw-normal me-3 custom-opacity">{location}</p>
-          </div>
-        </div>
-        <div className="col-12 col-md-6 col-lg-4 flex-column flex-md-row d-flex align-items-center justify-content-start">
-          <img src={require("../../Asset/Expanded.png")} alt="email" />
-          <div>
-            <h4 className="fw-bold me-3 mt-md-0 my-2">البريد الالكتروني</h4>
-            <p className="fw-normal me-3 custom-opacity">{email}</p>
-          </div>
-        </div>
-        <div className="col-12 col-md-6 col-lg-4 flex-column flex-md-row d-flex align-items-center justify-content-start">
-          <img src={require("../../Asset/Call Sales.png")} alt="email" />
-          <div>
-            <h4 className="fw-bold me-3 mt-md-0 my-2">رقم الهاتف</h4>
-            <p className="fw-normal me-3 custom-opacity">{phone}</p>
-          </div>
-        </div>
-      </section>
+              <input
+                type="text"
+                name="name"
+                className="form-control p-3 mb-3"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="الاسم الكامل..."
+              />
+              <input
+                type="text"
+                name="email"
+                className="form-control p-3 mb-3"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="البريد الالكتروني او رقم الهاتف..."
+              />
+              <textarea
+                name="message"
+                className="form-control p-3 mb-3"
+                value={form.message}
+                onChange={handleChange}
+                placeholder="الرسالة..."
+                rows="7"
+              />
+            </div>
+            <div className="col-md-5 col-12">{MapShowOnPage}</div>
+          </section>
+          <section className="my-3 d-flex align-items-center flex-wrap justify-content-between">
+            <div className="col-12 col-md-6 col-lg-4 flex-column flex-md-row d-flex align-items-center justify-content-start">
+              <img src={require("../../Asset/Layer_17.png")} alt="email" />
+              <div>
+                <h4 className="fw-bold me-3 text-md-end text-center mt-md-0 my-2">
+                  موقعنا
+                </h4>
+                <p className="fw-normal me-3 custom-opacity">{location}</p>
+              </div>
+            </div>
+            <div className="col-12 col-md-6 col-lg-4 flex-column flex-md-row d-flex align-items-center justify-content-start">
+              <img src={require("../../Asset/Expanded.png")} alt="email" />
+              <div>
+                <h4 className="fw-bold me-3 mt-md-0 my-2">البريد الالكتروني</h4>
+                <p className="fw-normal me-3 custom-opacity">{email}</p>
+              </div>
+            </div>
+            <div className="col-12 col-md-6 col-lg-4 flex-column flex-md-row d-flex align-items-center justify-content-start">
+              <img src={require("../../Asset/Call Sales.png")} alt="email" />
+              <div>
+                <h4 className="fw-bold me-3 mt-md-0 my-2">رقم الهاتف</h4>
+                <p className="fw-normal me-3 custom-opacity">{phone}</p>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }

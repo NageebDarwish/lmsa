@@ -19,16 +19,10 @@ export default function Login() {
   const Submit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `${baseUrl}/login`,
-        {
-          email: email,
-          password: password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${baseUrl}/login`, {
+        email: email,
+        password: password,
+      });
       setErr(false);
       const Token = res.data.data.token;
       const cookies = new Cookies();

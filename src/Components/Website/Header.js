@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
 import { NavLink } from "react-router-dom";
 import { baseUrl } from "../../Api/Api";
 
@@ -20,12 +21,16 @@ export default function Header() {
       style={{ boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)", padding: "0" }}
     >
       <div className="container-fluid container-md">
-        <img
-          src={image}
-          className="navbar-brand"
-          alt="logo"
-          style={{ width: "60px", height: "60px", objectFit: "contain" }}
-        />
+        {image !== "" ? (
+          <img
+            src={image}
+            className="navbar-brand"
+            alt="logo"
+            style={{ width: "60px", height: "60px", objectFit: "contain" }}
+          />
+        ) : (
+          <Skeleton width={60} height={60} />
+        )}
 
         <button
           className="navbar-toggler"

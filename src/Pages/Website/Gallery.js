@@ -1,15 +1,28 @@
 import { useEffect, useState } from "react";
+import LoadingWebsite from "../../Components/Loading/LoadingWebsite";
 import { baseUrl } from "./../../Api/Api";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 export default function GalleryPage() {
   const [gallery, setGallery] = useState([]);
   const [galleryDescription, setGalleryDescription] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [sketleton, setSketleton] = useState(true);
+
+  const [open, setOpen] = useState(false);
+
+  const images = gallery.map((img) => ({ src: img.images }));
+
   // Services Content
 
   useEffect(() => {
     fetch(`${baseUrl}/gallery`)
       .then((res) => res.json())
-      .then((data) => setGallery(data));
+      .then((data) => setGallery(data))
+      .finally(() => setSketleton(false));
   }, []);
 
   //   Service Description
@@ -18,7 +31,8 @@ export default function GalleryPage() {
       .then((res) => res.json())
       .then((data) => {
         setGalleryDescription(data[0].description);
-      });
+      })
+      .finally(setLoading(false));
   }, []);
 
   // Render Gallery Images
@@ -33,23 +47,49 @@ export default function GalleryPage() {
           backgroundSize: "cover",
           width: "100%",
           height: "200px",
+          cursor: "pointer",
         }}
         className="gallery-img"
+        onClick={() => setOpen(true)}
       ></div>
+      {open && (
+        <Lightbox
+          open={open}
+          onClick={() => setOpen(false)}
+          close={() => setOpen(false)}
+          slides={images}
+          startIndex={open.index || 0}
+          onChange={(index) => setOpen({ open: true, index })}
+        />
+      )}
     </div>
   ));
 
   return (
     <div className="container-sm container-fluid">
-      <section className="mt-5" style={{ minHeight: "80vh" }}>
-        <h1 className="text-center mb-3 fw-bold position-relative custom-line-2">
-          المعرض
-        </h1>
-        <p className="text-center fw-bold se-color">{galleryDescription}</p>
-        <div className="mt-3 row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3">
-          {showGalleryImages}
-        </div>
-      </section>
+      {loading ? (
+        <LoadingWebsite />
+      ) : (
+        <section className="mt-5" style={{ minHeight: "80vh" }}>
+          <h1 className="text-center mb-3 fw-bold position-relative custom-line-2">
+            المعرض
+          </h1>
+          <p className="text-center fw-bold se-color">{galleryDescription}</p>
+          <div className="mt-3 row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3">
+            {sketleton ? (
+              <>
+                <Skeleton className="col" height={200} />
+                <Skeleton className="col" height={200} />
+                <Skeleton className="col" height={200} />
+                <Skeleton className="col" height={200} />
+                <Skeleton className="col" height={200} />
+              </>
+            ) : (
+              showGalleryImages
+            )}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

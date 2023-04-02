@@ -18,7 +18,7 @@ export default function Tab() {
   // Get Data
 
   useEffect(() => {
-    fetch(`${baseUrl}/tab/`)
+    fetch(`${baseUrl}/tab`)
       .then((res) => res.json())
       .then((res) => {
         setTab({

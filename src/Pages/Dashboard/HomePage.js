@@ -19,7 +19,7 @@ export default function DashHomePage() {
   // Get Data
 
   useEffect(() => {
-    fetch(`${baseUrl}/homeA/`)
+    fetch(`${baseUrl}/homeA`)
       .then((res) => res.json())
       .then((res) => {
         setHomePage({

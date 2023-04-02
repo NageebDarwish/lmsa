@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { baseUrl } from "./../../Api/Api";
+import LoadingWebsite from "./../../Components/Loading/LoadingWebsite";
 
 export default function ServicesPage() {
   const [services, setSevices] = useState([]);
   const [servicesDescription, setServicesDescription] = useState("");
+  const [loading, setLoading] = useState(true);
   // Services Content
 
   useEffect(() => {
@@ -18,7 +20,8 @@ export default function ServicesPage() {
       .then((res) => res.json())
       .then((data) => {
         setServicesDescription(data[0].description);
-      });
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   // Render Services
@@ -38,13 +41,17 @@ export default function ServicesPage() {
 
   return (
     <div className="container-sm container-fluid">
-      <section className="mt-5" style={{ minHeight: "80vh" }}>
-        <h1 className="text-center mb-3 fw-bold position-relative custom-line-2">
-          خدماتنا
-        </h1>
-        <p className="text-center fw-bold se-color">{servicesDescription}</p>
-        <div className="row mt-5 gy-3">{showServices}</div>
-      </section>
+      {loading ? (
+        <LoadingWebsite />
+      ) : (
+        <section className="mt-5" style={{ minHeight: "80vh" }}>
+          <h1 className="text-center mb-3 fw-bold position-relative custom-line-2">
+            خدماتنا
+          </h1>
+          <p className="text-center fw-bold se-color">{servicesDescription}</p>
+          <div className="row mt-5 gy-3">{showServices}</div>
+        </section>
+      )}
     </div>
   );
 }
