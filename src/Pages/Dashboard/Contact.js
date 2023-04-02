@@ -2,12 +2,16 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../Api/Api";
 import { User } from "../../Context/UserContext";
+import LoadingSubmit from "./../../Components/Loading/LoadingSubmit";
 
 export default function Contact() {
   const [description, setDescription] = useState("");
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  // Loading
+  const [loading, setLoading] = useState(false);
 
   //   Err Msgs
   const [Aceept, setAccept] = useState(false);
@@ -33,6 +37,7 @@ export default function Contact() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
 
     try {
       await axios.post(
@@ -56,90 +61,101 @@ export default function Contact() {
       } else {
         setErrMsg("خطأ في استجابة السيرفر");
       }
+    } finally {
+      setLoading(false);
     }
   }
   return (
-    <section className="m-4 w-100">
-      <div
-        className="bg-white"
-        style={{ padding: "20px", borderRadius: "12px" }}
-      >
-        <form onSubmit={handleSubmit} className="mt-3">
-          <div className="mt-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">
-              الوصف
+    <>
+      {loading && <LoadingSubmit />}
+      <section className="m-4 w-100">
+        <h3 className="mb-4 position-relative custom-line">
+          تعديل معلومات صفحة تواصل معنا
+        </h3>
+        <div
+          className="bg-white"
+          style={{ padding: "20px", borderRadius: "12px" }}
+        >
+          <form onSubmit={handleSubmit} className="mt-3">
+            <div className="mt-3">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
+                الوصف
+              </label>
+              <textarea
+                type="text"
+                name="description"
+                className="form-control"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                id="exampleFormControlInput1"
+                placeholder="الوصف ..."
+              />
+              {description === "" && Aceept && (
+                <span className="err">حقل الوصف مطلوب</span>
+              )}
+            </div>
+            <label
+              htmlFor="exampleFormControlInput1"
+              className="form-label mt-2"
+            >
+              الموقع
             </label>
-            <textarea
+            <input
               type="text"
               name="description"
               className="form-control"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
               id="exampleFormControlInput1"
-              placeholder="الوصف ..."
+              placeholder="رابط الموقع ..."
             />
-            {description === "" && Aceept && (
-              <span className="err">حقل الوصف مطلوب</span>
+            {website === "" && Aceept && (
+              <span className="err">حقل رابط الموقع مطلوب</span>
             )}
-          </div>
-          <label htmlFor="exampleFormControlInput1" className="form-label mt-2">
-            الموقع
-          </label>
-          <input
-            type="text"
-            name="description"
-            className="form-control"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            id="exampleFormControlInput1"
-            placeholder="رابط الموقع ..."
-          />
-          {website === "" && Aceept && (
-            <span className="err">حقل رابط الموقع مطلوب</span>
-          )}
 
-          <div className="mt-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">
-              البريد الإلكتروني
-            </label>
-            <input
-              type="email"
-              name="description"
-              className="form-control"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              id="exampleFormControlInput1"
-              placeholder="البريد الإلكتروني ..."
-            />
-            {email === "" && Aceept && (
-              <span className="err">حقل البريد الإلكتروني مطلوب</span>
-            )}
-          </div>
-          <div className="mt-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">
-              رقم الهاتف
-            </label>
-            <input
-              type="number"
-              name="description"
-              className="form-control"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              id="exampleFormControlInput1"
-              placeholder="رقم الهاتف ..."
-            />
-            {phone === "" && Aceept && (
-              <p className="err">حقل رقم الهاتف مطلوب</p>
-            )}
-          </div>
-          {errMsg && (
-            <div className="alert alert-danger mt-2" role="alert">
-              {errMsg}
+            <div className="mt-3">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
+                البريد الإلكتروني
+              </label>
+              <input
+                type="email"
+                name="description"
+                className="form-control"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                id="exampleFormControlInput1"
+                placeholder="البريد الإلكتروني ..."
+              />
+              {email === "" && Aceept && (
+                <span className="err">حقل البريد الإلكتروني مطلوب</span>
+              )}
             </div>
-          )}
-          <button className="btn btn-primary mt-5">تعديل</button>
-        </form>
-      </div>
-    </section>
+            <div className="mt-3">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
+                رقم الهاتف
+              </label>
+              <input
+                type="number"
+                name="description"
+                className="form-control"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                id="exampleFormControlInput1"
+                placeholder="رقم الهاتف ..."
+              />
+              {phone === "" && Aceept && (
+                <p className="err">حقل رقم الهاتف مطلوب</p>
+              )}
+            </div>
+            {errMsg && (
+              <div className="alert alert-danger mt-2" role="alert">
+                {errMsg}
+              </div>
+            )}
+            <button className="btn btn-primary mt-5">تعديل</button>
+          </form>
+        </div>
+      </section>
+    </>
   );
 }

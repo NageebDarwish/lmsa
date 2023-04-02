@@ -11,7 +11,11 @@ export default function DashHeader() {
   return (
     <nav
       className="navbar shadow-sm bg-light bg-body-tertiary"
-      style={{ position: isOpen && windowWidth <= 992 && "sticky", top: "0" }}
+      style={{
+        position: isOpen && windowWidth <= 992 && "sticky",
+        top: "0",
+        zIndex: "2",
+      }}
     >
       <div className="container-fluid">
         <div className="d-flex align-items-center">

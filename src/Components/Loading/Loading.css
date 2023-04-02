@@ -24,10 +24,23 @@
     transform: rotate(360deg);
   }
 }
+/* Web */
 .spinner-container-web {
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+/* Submit */
+.spinner-container-submit {
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(154, 160, 167, 0.3);
+  top: 0;
+  z-index: 1;
 }

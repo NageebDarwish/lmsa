@@ -70,6 +70,9 @@ export default function Map() {
   ));
   return (
     <section className="m-4 w-100">
+      <h3 className="mb-4 position-relative custom-line">
+        تعديل معلومات الخريطة
+      </h3>
       <div
         className="bg-white"
         style={{ padding: "20px", borderRadius: "12px" }}
