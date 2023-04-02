@@ -29,7 +29,7 @@ export default function Login() {
       cookies.set("Bearer", Token, { path: "/" });
       const userDetails = res.data.data.user;
       userNow.setAuth({ Token, userDetails });
-      Navigate(from, { replace: true });
+      Navigate("/dashboard/home");
       setErr(false);
     } catch (err) {
       console.log(err);
