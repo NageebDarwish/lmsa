@@ -4,6 +4,9 @@ import { baseUrl } from "./../../Api/Api";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Lightbox from "yet-another-react-lightbox";
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
+
 import "yet-another-react-lightbox/styles.css";
 
 export default function GalleryPage() {
@@ -52,16 +55,6 @@ export default function GalleryPage() {
         className="gallery-img"
         onClick={() => setOpen(true)}
       ></div>
-      {open && (
-        <Lightbox
-          open={open}
-          onClick={() => setOpen(false)}
-          close={() => setOpen(false)}
-          slides={images}
-          startIndex={open.index || 0}
-          onChange={(index) => setOpen({ open: true, index })}
-        />
-      )}
     </div>
   ));
 
@@ -71,6 +64,15 @@ export default function GalleryPage() {
         <LoadingWebsite />
       ) : (
         <section className="mt-5" style={{ minHeight: "80vh" }}>
+          {open && (
+            <Lightbox
+              open={open}
+              onClick={() => setOpen(false)}
+              close={() => setOpen(false)}
+              slides={images}
+              plugins={[Fullscreen, Slideshow]}
+            />
+          )}
           <h1 className="text-center mb-3 fw-bold position-relative custom-line-2">
             المعرض
           </h1>
