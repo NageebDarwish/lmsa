@@ -3,7 +3,11 @@
     height: 80vh;
   }
 }
-
+@media (min-width: 1500px) {
+  .home-page {
+    height: 50vh;
+  }
+}
 .home-page img {
   max-width: 100%;
   max-height: 80vh;
@@ -11,7 +15,6 @@
 .btn-custom {
   background-color: var(--primary-color) !important;
   color: white !important;
-  border-radius: 18px !important;
 }
 .btn-custom svg {
   padding: 15px 10px;
@@ -51,4 +54,8 @@
 
 .custom-an:hover {
   background-color: inherit !important;
+}
+
+.bg-grey-2 {
+  background-color: #f7f7fc;
 }

@@ -92,7 +92,7 @@ export default function DashHomePage() {
                   htmlFor="exampleFormControlInput1"
                   className="form-label"
                 >
-                  اسم الشركة
+                  العنوان الرئيسي
                 </label>
                 <input
                   type="text"
@@ -101,7 +101,7 @@ export default function DashHomePage() {
                   value={homePage.title}
                   onChange={handleChange}
                   id="exampleFormControlInput1"
-                  placeholder="اسم الشركة..."
+                  placeholder="العنوان الرئيسي..."
                 />
                 {homePage.title === "" && accept && errMessage}
               </div>

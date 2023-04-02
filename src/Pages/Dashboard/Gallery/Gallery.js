@@ -2,12 +2,14 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../../Api/Api";
+import LoadingSubmit from "../../../Components/Loading/LoadingSubmit";
 import { User } from "../../../Context/UserContext";
 import "./gallery.css";
 
 export default function Gallery() {
   const { auth } = useContext(User);
   const token = auth.Token;
+  const [loading, setLoading] = useState(false);
 
   // Gallery Description
   const [galleryDescription, setGalleryDescription] = useState("");
@@ -98,6 +100,7 @@ export default function Gallery() {
 
   // Upload New Images
   const ImageUploaderHandler = async (e) => {
+    setLoading(true);
     const uploadedImages = Array.from(e.target.files);
     setImages([...images, ...uploadedImages]);
     const formData = new FormData();
@@ -115,6 +118,8 @@ export default function Gallery() {
       window.location.pathname = "/dashboard/gallery";
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -142,64 +147,67 @@ export default function Gallery() {
   }
 
   return (
-    <section className="m-4 w-100">
-      <h2>تعديل معلومات المعرض</h2>
+    <>
+      {loading && <LoadingSubmit />}
+      <section className="m-4 w-100">
+        <h2>تعديل معلومات المعرض</h2>
 
-      <div
-        className="bg-white"
-        style={{ padding: "20px", borderRadius: "12px" }}
-      >
-        <label htmlFor="exampleFormControlInput1" className="form-label">
-          وصف صفحة المعرض
-        </label>
-        <input
-          type="text"
-          name="title"
-          className="form-control"
-          value={galleryDescription}
-          onChange={(e) => setGalleryDescription(e.target.value)}
-          id="exampleFormControlInput1"
-          placeholder="الوصف..."
-        />
-
-        <button
-          disabled={oldValue === galleryDescription ? true : false}
-          onClick={submitGalleryDescription}
-          className="btn btn-primary mt-5"
+        <div
+          className="bg-white"
+          style={{ padding: "20px", borderRadius: "12px" }}
         >
-          حفظ التعديلات
-        </button>
-        {sucess && (
-          <div className="alert alert-primary mt-2" role="alert">
-            تم الحفظ بنجاح
-          </div>
-        )}
-        {err && (
-          <div className="alert alert-danger mt-2" role="alert">
-            {err}
-          </div>
-        )}
-      </div>
-      <hr />
-      <div className="d-flex align-items-center justify-content-between">
-        <h2>صور المعرض</h2>
-        <label htmlFor="formFile" className="form-label btn btn-primary">
+          <label htmlFor="exampleFormControlInput1" className="form-label">
+            وصف صفحة المعرض
+          </label>
+          <input
+            type="text"
+            name="title"
+            className="form-control"
+            value={galleryDescription}
+            onChange={(e) => setGalleryDescription(e.target.value)}
+            id="exampleFormControlInput1"
+            placeholder="الوصف..."
+          />
+
+          <button
+            disabled={oldValue === galleryDescription ? true : false}
+            onClick={submitGalleryDescription}
+            className="btn btn-primary mt-5"
+          >
+            حفظ التعديلات
+          </button>
+          {sucess && (
+            <div className="alert alert-primary mt-2" role="alert">
+              تم الحفظ بنجاح
+            </div>
+          )}
+          {err && (
+            <div className="alert alert-danger mt-2" role="alert">
+              {err}
+            </div>
+          )}
+        </div>
+        <hr />
+        <div className="d-flex align-items-center justify-content-between">
+          <h2>صور المعرض</h2>
+          <label htmlFor="formFile" className="form-label btn btn-primary">
+            <i className="fa-solid fa-plus"></i> رفع صور جديدة
+          </label>
+          <input
+            className="form-control custom-input"
+            id="formFile"
+            type="file"
+            multiple
+            onChange={ImageUploaderHandler}
+          />
+        </div>
+        <div className="mt-3 row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+          {showGalleryImages}
+        </div>
+        <label htmlFor="formFile" className="form-label btn btn-primary mt-3">
           <i className="fa-solid fa-plus"></i> رفع صور جديدة
         </label>
-        <input
-          className="form-control custom-input"
-          id="formFile"
-          type="file"
-          multiple
-          onChange={ImageUploaderHandler}
-        />
-      </div>
-      <div className="mt-3 row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-        {showGalleryImages}
-      </div>
-      <label htmlFor="formFile" className="form-label btn btn-primary mt-3">
-        <i className="fa-solid fa-plus"></i> رفع صور جديدة
-      </label>
-    </section>
+      </section>
+    </>
   );
 }

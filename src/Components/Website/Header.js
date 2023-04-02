@@ -16,10 +16,7 @@ export default function Header() {
   }, []);
 
   return (
-    <nav
-      className="navbar navbar-expand-lg bg-white"
-      style={{ boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)", padding: "0" }}
-    >
+    <nav className="navbar navbar-expand-lg" style={{ background: "#F1F3FF" }}>
       <div className="container-fluid container-md">
         {image !== "" ? (
           <img
@@ -64,6 +61,13 @@ export default function Header() {
               <NavLink to="/contact">اتصل بنا</NavLink>
             </li>
           </ul>
+          <a
+            href=""
+            className="btn btn-black py-3 px-5 d-block"
+            style={{ borderRadius: "13.18px" }}
+          >
+            اتصل بنا الآن
+          </a>
         </div>
       </div>
     </nav>

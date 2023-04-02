@@ -17,17 +17,18 @@
   color: var(--primary-color) !important;
   position: relative;
 }
-.custom-ul li .active::before {
-  content: "";
-  background-color: var(--primary-color);
-  width: 100%;
-  height: 2px;
-  position: absolute;
-  bottom: 0;
-}
 
 @media (max-width: 992px) {
   .navbar {
     padding: 1rem 0 !important;
   }
+}
+
+.btn-black {
+  background-color: black;
+  color: white;
+}
+.btn-black:hover {
+  color: white;
+  background-color: black;
 }
