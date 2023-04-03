@@ -54,15 +54,14 @@ export default function HomePage() {
   // Render Best Services
 
   const showServices = bestServices.map((item, key) => (
-    <div
-      key={key}
-      className="col-12 col-sm-6 col-md-3 my-2 bg-white py-5 px-2 custom-service-card"
-      style={{
-        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
-        borderRadius: "22px",
-      }}
-    >
-      <div className="d-flex align-items-center justify-content-between flex-column h-100">
+    <div key={key} className="col-12 col-sm-6 col-lg-3 my-2">
+      <div
+        className="d-flex align-items-center justify-content-between flex-column h-100 bg-white py-5 px-2 mx-2 custom-service-card"
+        style={{
+          boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+          borderRadius: "22px",
+        }}
+      >
         <div>
           <div className="mb-4">
             <img src={item.icon} alt="icon" width="100px" />
@@ -160,29 +159,36 @@ export default function HomePage() {
                     className="ps-sm-5 pb-3"
                   />
                 </div>
-                <div className="col-md-6 col-12">
-                  <h1
-                    className="fw-bold pb-3"
-                    style={{ color: "var(--primary-color)" }}
-                  >
-                    عن شركتنا
-                  </h1>
-                  <p
-                    style={{
-                      fontWeight: "500",
-                      color: "#363636",
-                      lineHeight: "2",
-                    }}
-                  >
-                    {homePage.about_desc}
-                  </p>
-                  <Link
-                    to="/about"
-                    className="btn btn-blue mt-2"
-                    style={{ width: "50%" }}
-                  >
-                    معرفة المزيد
-                  </Link>
+                <div className="col-md-6 col-12 d-flex  justify-content-between flex-column h-100">
+                  <div className="h-75">
+                    <h1
+                      className="fw-bold pb-3"
+                      style={{ color: "var(--primary-color)" }}
+                    >
+                      عن شركتنا
+                    </h1>
+                    <p
+                      className="custom-about"
+                      style={{
+                        fontWeight: "500",
+                        color: "#363636",
+                        lineHeight: "2",
+                        height: "70%",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {homePage.about_desc}
+                    </p>
+                  </div>
+                  <div>
+                    <Link
+                      to="/about"
+                      className="btn btn-blue my-3"
+                      style={{ width: "50%" }}
+                    >
+                      معرفة المزيد
+                    </Link>
+                  </div>
                 </div>
               </section>
             </div>
@@ -197,7 +203,7 @@ export default function HomePage() {
                 >
                   خدماتنا
                 </h1>
-                <div className="d-flex align-items-stretch justify-content-between text-center flex-wrap mt-5 gap-md-5">
+                <div className="d-flex align-items-stretch justify-content-between text-center flex-wrap mt-5">
                   {showServices}
                 </div>
               </section>
