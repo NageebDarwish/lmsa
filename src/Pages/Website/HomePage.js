@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import LoadingWebsite from "../../Components/Loading/LoadingWebsite";
 import { baseUrl } from "./../../Api/Api";
 import "./website.css";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const [homePage, setHomePage] = useState({
@@ -66,11 +67,13 @@ export default function HomePage() {
           <div className="mb-4">
             <img src={item.icon} alt="icon" width="100px" />
           </div>
-          <h3 className="fw-bold mb-4">{item.title}</h3>
+          <h3 className="fw-bold mb-4" style={{ fontSize: "22px" }}>
+            {item.title}
+          </h3>
           <p>{item.description}</p>
         </div>
         <a
-          href={`https://wa.me/0941481632/?text=أريد طلب الخدمة ${item.title}`}
+          href={`https://wa.me/${number}/?text=أريد طلب خدمة ${item.title}`}
           rel="noreferrer"
           target="_blank"
           className="btn btn-blue mt-2"
@@ -92,7 +95,7 @@ export default function HomePage() {
               <div className="col-md-6 col-12">
                 <h1 className="fw-bold pb-3">{homePage.title}</h1>
                 <h5 className="w-75 mb-4 lh-lg ">{homePage.description}</h5>
-                <a href="#about" className="custom-an">
+                <a href="#services" className="custom-an">
                   <button
                     className="btn btn-custom d-flex align-items-center justify-content-around w-50 py-3"
                     style={{ borderRadius: "200px" }}
@@ -173,6 +176,13 @@ export default function HomePage() {
                   >
                     {homePage.about_desc}
                   </p>
+                  <Link
+                    to="/about"
+                    className="btn btn-blue mt-2"
+                    style={{ width: "50%" }}
+                  >
+                    معرفة المزيد
+                  </Link>
                 </div>
               </section>
             </div>
@@ -180,7 +190,7 @@ export default function HomePage() {
           {/* Best Services */}
           <div className="bg-grey-2">
             <div className="container-sm container-fluid">
-              <section className="pt-5 ">
+              <section className="pt-5" id="services">
                 <h1
                   className="text-center fw-bold"
                   style={{ color: "var(--primary-color)" }}

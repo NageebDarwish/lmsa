@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { baseUrl } from "../../Api/Api";
 
 import "./Header.css";
@@ -61,13 +61,13 @@ export default function Header() {
               <NavLink to="/contact">اتصل بنا</NavLink>
             </li>
           </ul>
-          <a
-            href=""
+          <Link
+            to="/contact"
             className="btn btn-black py-3 px-5 d-block"
             style={{ borderRadius: "13.18px" }}
           >
             اتصل بنا الآن
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
