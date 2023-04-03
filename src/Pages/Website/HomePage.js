@@ -53,12 +53,31 @@ export default function HomePage() {
   // Render Best Services
 
   const showServices = bestServices.map((item, key) => (
-    <div key={key} className="col-12 col-sm-6 col-md-3 my-2">
-      <div style={{ height: "60px" }} className="mb-3">
-        <img src={item.icon} alt="icon" width="60px" />
+    <div
+      key={key}
+      className="col-12 col-sm-6 col-md-3 my-2 bg-white py-5 px-2 custom-service-card"
+      style={{
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+        borderRadius: "22px",
+      }}
+    >
+      <div className="d-flex align-items-center justify-content-between flex-column h-100">
+        <div>
+          <div className="mb-4">
+            <img src={item.icon} alt="icon" width="100px" />
+          </div>
+          <h3 className="fw-bold mb-4">{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+        <a
+          href={`https://wa.me/0941481632/?text=أريد طلب الخدمة ${item.title}`}
+          rel="noreferrer"
+          target="_blank"
+          className="btn btn-blue mt-2"
+        >
+          طلب الخدمة
+        </a>
       </div>
-      <h3 className="fw-bold">{item.title}</h3>
-      <p>{item.description}</p>
     </div>
   ));
 
@@ -162,8 +181,13 @@ export default function HomePage() {
           <div className="bg-grey-2">
             <div className="container-sm container-fluid">
               <section className="pt-5 ">
-                <h1 className="text-center fw-bold">أفضل خدماتنا</h1>
-                <div className="d-flex align-items-center justify-content-between text-center flex-wrap mt-5 gap-md-5">
+                <h1
+                  className="text-center fw-bold"
+                  style={{ color: "var(--primary-color)" }}
+                >
+                  خدماتنا
+                </h1>
+                <div className="d-flex align-items-stretch justify-content-between text-center flex-wrap mt-5 gap-md-5">
                   {showServices}
                 </div>
               </section>

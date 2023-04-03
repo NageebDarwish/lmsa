@@ -59,3 +59,25 @@
 .bg-grey-2 {
   background-color: #f7f7fc;
 }
+
+.custom-service-card {
+  transition: 0.3s;
+}
+
+.custom-service-card:hover {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.custom-service-card:hover a {
+  background-color: white !important;
+  color: var(--primary-color) !important;
+}
+
+.btn-blue {
+  background: #63d1e0 !important;
+  color: black !important;
+  width: 80%;
+  padding: 15px 0;
+  border-radius: 15px;
+}
