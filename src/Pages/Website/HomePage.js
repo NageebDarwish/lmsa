@@ -177,7 +177,7 @@ export default function HomePage() {
                         overflow: "hidden",
                       }}
                     >
-                      {homePage.about_desc}
+                      {homePage.about_desc.substring(0, 500)}...
                     </p>
                   </div>
                   <div>
