@@ -22,6 +22,7 @@ import ContactUsPage from "./Pages/Website/ContactUsPage";
 import { useEffect } from "react";
 import { baseUrl } from "./Api/Api";
 import Logout from "./Pages/Dashboard/logout";
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 
 function App() {
   useEffect(() => {
@@ -43,38 +44,44 @@ function App() {
       });
   }, []);
   return (
-    <Routes>
-      {/* Protected Routes */}
-      <Route element={<PersistLogin />}>
-        <Route element={<AuthRequire />}>
-          <Route path="/dashboard" element={<DashBoard />}>
-            <Route path="home" element={<DashHomePage />} />
-            <Route path="aboutus" element={<DashAboutUsPage />} />
-            <Route path="services" element={<Services />} />
-            <Route path="services/create-service" element={<CreateService />} />
-            <Route
-              path="services/update-service/:id"
-              element={<UpdateService />}
-            />
-            <Route path="gallery" element={<Gallery />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="footer" element={<Footer />} />
-            <Route path="map" element={<Map />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="logout" element={<Logout />} />
+    <>
+      <ScrollToTop />
+      <Routes>
+        {/* Protected Routes */}
+        <Route element={<PersistLogin />}>
+          <Route element={<AuthRequire />}>
+            <Route path="/dashboard" element={<DashBoard />}>
+              <Route path="home" element={<DashHomePage />} />
+              <Route path="aboutus" element={<DashAboutUsPage />} />
+              <Route path="services" element={<Services />} />
+              <Route
+                path="services/create-service"
+                element={<CreateService />}
+              />
+              <Route
+                path="services/update-service/:id"
+                element={<UpdateService />}
+              />
+              <Route path="gallery" element={<Gallery />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="footer" element={<Footer />} />
+              <Route path="map" element={<Map />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="logout" element={<Logout />} />
+            </Route>
           </Route>
         </Route>
-      </Route>
-      {/* Public Routes */}
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/" element={<Website />}>
-        <Route path="" element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="services" element={<ServicesPage />} />
-        <Route path="gallery" element={<GalleryPage />} />
-        <Route path="contact" element={<ContactUsPage />} />
-      </Route>
-    </Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/" element={<Website />}>
+          <Route path="" element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="gallery" element={<GalleryPage />} />
+          <Route path="contact" element={<ContactUsPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

@@ -8,6 +8,11 @@ import "./Header.css";
 
 export default function Header() {
   const [image, setImage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleItemClick = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     fetch(`${baseUrl}/tab`)
@@ -37,27 +42,31 @@ export default function Header() {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={() => setIsOpen(!isOpen)}
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}
+          id="navbarSupportedContent"
+        >
           <ul
             className="d-flex align-items-center justify-content-center navbar-nav custom-ul"
             style={{ flex: " 1" }}
           >
-            <li>
+            <li onClick={handleItemClick}>
               <NavLink to="/">الرئيسية</NavLink>
             </li>
-            <li>
+            <li onClick={handleItemClick}>
               <NavLink to="/about">عن شركتنا</NavLink>
             </li>
-            <li>
+            <li onClick={handleItemClick}>
               <NavLink to="/services">خدماتنا</NavLink>
             </li>
-            <li>
+            <li onClick={handleItemClick}>
               <NavLink to="/gallery">المعرض</NavLink>
             </li>
-            <li>
+            <li onClick={handleItemClick}>
               <NavLink to="/contact">اتصل بنا</NavLink>
             </li>
           </ul>
