@@ -66,37 +66,74 @@ export default function Gallery() {
       .then((data) => setGalleryImages(data));
   }, []);
 
-  const showGalleryImages = galleryImages.map((img, index) => (
-    <div className="col" key={index} style={{ position: "relative" }}>
-      <div
-        style={{
-          backgroundImage: `url(${img.images})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          width: "100%",
-          height: "200px",
-        }}
-        className="gallery-img"
-      >
-        <div
-          onClick={() => handleDelete(img.id)}
-          style={{ position: "absolute", top: "-6px", right: "-5px" }}
-        >
-          <i
-            className="fa-solid fa-circle-xmark"
-            style={{
-              borderRadius: "50%",
-              backgroundColor: "white",
-              border: "4px solid white",
-              color: "red",
-              cursor: "pointer",
-            }}
-          ></i>
+  const showGalleryImages = galleryImages.map((img, index) => {
+    if (
+      img.images.endsWith(".jpg") ||
+      img.images.endsWith(".jpeg") ||
+      img.images.endsWith(".png")
+    ) {
+      // Image file
+      return (
+        <div className="col" key={index} style={{ position: "relative" }}>
+          <img
+            src={img.images}
+            alt="gallery"
+            className="gallery-img"
+            style={{ width: "100%", height: "200px" }}
+          />
+          <div
+            onClick={() => handleDelete(img.id)}
+            style={{ position: "absolute", top: "-6px", right: "-5px" }}
+          >
+            <i
+              className="fa-solid fa-circle-xmark"
+              style={{
+                borderRadius: "50%",
+                backgroundColor: "white",
+                border: "4px solid white",
+                color: "red",
+                cursor: "pointer",
+              }}
+            ></i>
+          </div>
         </div>
-      </div>
-    </div>
-  ));
+      );
+    } else if (
+      img.images.endsWith(".mp4") ||
+      img.images.endsWith(".avi") ||
+      img.images.endsWith(".mov")
+    ) {
+      // Video file
+      return (
+        <div className="col" key={index} style={{ position: "relative" }}>
+          <video
+            src={img.images}
+            className="gallery-img"
+            style={{ width: "100%", height: "200px" }}
+            controls
+          />
+          <div
+            onClick={() => handleDelete(img.id)}
+            style={{ position: "absolute", top: "-6px", right: "-5px" }}
+          >
+            <i
+              className="fa-solid fa-circle-xmark"
+              style={{
+                borderRadius: "50%",
+                backgroundColor: "white",
+                border: "4px solid white",
+                color: "red",
+                cursor: "pointer",
+              }}
+            ></i>
+          </div>
+        </div>
+      );
+    } else {
+      // Unknown file type
+      return null; // or you can render an error message or do something else
+    }
+  });
 
   // Upload New Images
   const ImageUploaderHandler = async (e) => {
@@ -198,6 +235,7 @@ export default function Gallery() {
             id="formFile"
             type="file"
             multiple
+            accept=".jpg,.jpeg,.png,.mp4,.avi,.mov"
             onChange={ImageUploaderHandler}
           />
         </div>

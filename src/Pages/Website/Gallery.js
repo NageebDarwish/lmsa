@@ -14,10 +14,13 @@ export default function GalleryPage() {
   const [galleryDescription, setGalleryDescription] = useState("");
   const [loading, setLoading] = useState(true);
   const [sketleton, setSketleton] = useState(true);
-
+  const [photoIndex, setPhotoIndex] = useState(0);
   const [open, setOpen] = useState(false);
 
-  const images = gallery.map((img) => ({ src: img.images }));
+  const openLightbox = (index) => {
+    setPhotoIndex(index);
+    setOpen(true);
+  };
 
   // Services Content
 
@@ -40,23 +43,52 @@ export default function GalleryPage() {
 
   // Render Gallery Images
 
-  const showGalleryImages = gallery.map((img, key) => (
-    <div className="col" key={key}>
-      <div
-        style={{
-          backgroundImage: `url(${img.images})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          width: "100%",
-          height: "200px",
-          cursor: "pointer",
-        }}
-        className="gallery-img"
-        onClick={() => setOpen(true)}
-      ></div>
-    </div>
-  ));
+  const showGalleryImages = gallery.map((img, index) => {
+    if (
+      img.images.endsWith(".jpg") ||
+      img.images.endsWith(".jpeg") ||
+      img.images.endsWith(".png")
+    ) {
+      // Image file
+      return (
+        <div className="col" key={img.id}>
+          <div
+            style={{
+              backgroundImage: `url(${img.images})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              width: "100%",
+              height: "200px",
+              cursor: "pointer",
+            }}
+            className="gallery-img"
+            onClick={() => openLightbox(index)}
+          ></div>
+        </div>
+      );
+    } else if (
+      img.images.endsWith(".mp4") ||
+      img.images.endsWith(".avi") ||
+      img.images.endsWith(".mov")
+    ) {
+      // Video file
+      return (
+        <div className="col" key={img.id} style={{ position: "relative" }}>
+          <video
+            src={img.images}
+            onClick={() => setOpen(true)}
+            className="gallery-img"
+            style={{ width: "100%", height: "200px", cursor: "pointer" }}
+            controls
+          />
+        </div>
+      );
+    } else {
+      // Unknown file type
+      return null; // or you can render an error message or do something else
+    }
+  });
 
   return (
     <div className="container-sm container-fluid">
@@ -66,10 +98,9 @@ export default function GalleryPage() {
         <section className="mt-5" style={{ minHeight: "80vh" }}>
           {open && (
             <Lightbox
-              open={open}
-              onClick={() => setOpen(false)}
-              close={() => setOpen(false)}
-              slides={images}
+              mainSrc={gallery[photoIndex].images}
+              onCloseRequest={() => setOpen(false)}
+              slides={gallery}
               plugins={[Fullscreen, Slideshow]}
             />
           )}

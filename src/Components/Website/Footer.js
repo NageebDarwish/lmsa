@@ -67,25 +67,25 @@ export default function Footer() {
                   <li>
                     <a href={social.facebook} className="text-white">
                       <i className="fa-brands fa-facebook"></i>
-                      <span> {social.facebook}</span>
+                      <span> صفحة الفيسبوك</span>
                     </a>
                   </li>
                   <li>
                     <a href={social.instagram} className="text-white">
                       <i className="fa-brands fa-instagram"></i>
-                      <span> {social.instagram}</span>
+                      <span> صفحة الانستغرام</span>
                     </a>
                   </li>
                   <li>
                     <a href={social.youtube} className="text-white">
                       <i className="fa-brands fa-youtube"></i>
-                      <span> {social.youtube}</span>
+                      <span> قناتنا على اليويتوب</span>
                     </a>
                   </li>
                   <li>
                     <a href={social.twitter} className="text-white">
                       <i className="fa-brands fa-twitter"></i>
-                      <span> {social.twitter}</span>
+                      <span> صفحتنا على تويتر </span>
                     </a>
                   </li>
                 </ul>
