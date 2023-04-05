@@ -14,13 +14,10 @@ export default function GalleryPage() {
   const [galleryDescription, setGalleryDescription] = useState("");
   const [loading, setLoading] = useState(true);
   const [sketleton, setSketleton] = useState(true);
-  const [photoIndex, setPhotoIndex] = useState(0);
+
   const [open, setOpen] = useState(false);
 
-  const openLightbox = (index) => {
-    setPhotoIndex(index);
-    setOpen(true);
-  };
+  const images = gallery.map((img) => ({ src: img.images, key: img.id }));
 
   // Services Content
 
@@ -43,7 +40,7 @@ export default function GalleryPage() {
 
   // Render Gallery Images
 
-  const showGalleryImages = gallery.map((img, index) => {
+  const showGalleryImages = gallery.map((img, key) => {
     if (
       img.images.endsWith(".jpg") ||
       img.images.endsWith(".jpeg") ||
@@ -51,7 +48,7 @@ export default function GalleryPage() {
     ) {
       // Image file
       return (
-        <div className="col" key={img.id}>
+        <div className="col" key={key}>
           <div
             style={{
               backgroundImage: `url(${img.images})`,
@@ -63,7 +60,7 @@ export default function GalleryPage() {
               cursor: "pointer",
             }}
             className="gallery-img"
-            onClick={() => openLightbox(index)}
+            onClick={() => setOpen(true)}
           ></div>
         </div>
       );
@@ -74,7 +71,7 @@ export default function GalleryPage() {
     ) {
       // Video file
       return (
-        <div className="col" key={img.id} style={{ position: "relative" }}>
+        <div className="col" key={key} style={{ position: "relative" }}>
           <video
             src={img.images}
             onClick={() => setOpen(true)}
@@ -98,9 +95,10 @@ export default function GalleryPage() {
         <section className="mt-5" style={{ minHeight: "80vh" }}>
           {open && (
             <Lightbox
-              mainSrc={gallery[photoIndex].images}
-              onCloseRequest={() => setOpen(false)}
-              slides={gallery}
+              open={open}
+              onClick={() => setOpen(false)}
+              close={() => setOpen(false)}
+              slides={images}
               plugins={[Fullscreen, Slideshow]}
             />
           )}
