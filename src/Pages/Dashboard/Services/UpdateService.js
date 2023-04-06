@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../../Api/Api";
 import LoadingSubmit from "../../../Components/Loading/LoadingSubmit";
 import { User } from "../../../Context/UserContext";
+import Cookies from "universal-cookie";
 
 export default function UpdateService() {
   const [title, setTitle] = useState("");
@@ -12,6 +13,8 @@ export default function UpdateService() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [serviceImages, setServiceImages] = useState([]);
+
+  const cookie = new Cookies();
 
   //   Err Msgs
   const [Aceept, setAccept] = useState(false);
@@ -95,7 +98,10 @@ export default function UpdateService() {
       });
       window.location.pathname = "/dashboard/services";
     } catch (err) {
-      console.log(err);
+      if (err.response.status === 401) {
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
+      }
     } finally {
       setLoading(false);
     }

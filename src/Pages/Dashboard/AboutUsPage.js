@@ -5,6 +5,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import axios from "axios";
 import { User } from "../../Context/UserContext";
+import { Navigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 export default function DashAboutUsPage() {
   const [disableButton, setDisableButton] = useState(true);
@@ -12,6 +14,8 @@ export default function DashAboutUsPage() {
   const [newContent, setNewContent] = useState("");
   const [success, setSuccess] = useState(false);
   const [err, setErr] = useState(false);
+
+  const cookie = new Cookies();
 
   // Get Token
   const { auth } = useContext(User);
@@ -81,7 +85,8 @@ export default function DashAboutUsPage() {
     } catch (err) {
       setSuccess(false);
       if (err.response.status === 401) {
-        setErr("خطأ في عملية المصادقة");
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
       } else if (err.response.status === 422) {
         setErr("يجب ان يحتوي حقل هذه الصفحة على حرف على الأقل!");
       } else {

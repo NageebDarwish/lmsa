@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../Api/Api";
 import axios from "axios";
 import { User } from "../../Context/UserContext";
+import Cookies from "universal-cookie";
 
 export default function Tab() {
   const [tab, setTab] = useState({
@@ -14,6 +15,7 @@ export default function Tab() {
 
   const [accept, setAccept] = useState(false);
   const { auth } = useContext(User);
+  const cookie = new Cookies();
   const errMessage = <span className="err">هذا الحقل مطلوب</span>;
   // Get Data
 
@@ -60,7 +62,10 @@ export default function Tab() {
         window.location.pathname = "/dashboard/settings";
       }
     } catch (err) {
-      console.log(err);
+      if (err.response.status === 401) {
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
+      }
     }
   };
   // Hanle Err

@@ -5,6 +5,7 @@ import LoadingSubmit from "../../Components/Loading/LoadingSubmit";
 import { User } from "../../Context/UserContext";
 import Color from "./Color";
 import Tab from "./Tab";
+import Cookies from "universal-cookie";
 
 export default function Settings() {
   const [user, setUser] = useState({
@@ -14,6 +15,7 @@ export default function Settings() {
     password_confirmation: "",
   });
 
+  const cookie = new Cookies();
   // Loading
   const [loading, setLoading] = useState(false);
 
@@ -66,9 +68,9 @@ export default function Settings() {
       window.location.pathname = "/dashboard/settings";
     } catch (err) {
       setAccept(true);
-
       if (err.response.status === 401) {
-        setErrMsg("خطأ في عملية المصادقة");
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
       } else if (err.response.status === 422) {
         return null;
       } else {

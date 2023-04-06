@@ -18,7 +18,10 @@ export default function Logout() {
       cookie.remove("Bearer");
       window.location.pathname = "/";
     } catch (err) {
-      console.log(err);
+      if (err.response.status === 401) {
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
+      }
     }
   }
   logout();

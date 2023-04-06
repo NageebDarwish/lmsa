@@ -2,12 +2,15 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { baseUrl } from "../../../Api/Api";
 import { User } from "../../../Context/UserContext";
+import Cookies from "universal-cookie";
 
 export default function CreateService() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [special, setSpecial] = useState(false);
+
+  const cookie = new Cookies();
 
   //   Err Msgs
   const [Aceept, setAccept] = useState(false);
@@ -36,7 +39,8 @@ export default function CreateService() {
       console.log(err);
       setAccept(true);
       if (err.response.status === 401) {
-        setErrMsg("خطأ في عملية المصادقة");
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
       } else if (err.response.status === 422) {
         return null;
       } else {

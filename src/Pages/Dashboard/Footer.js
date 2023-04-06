@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../Api/Api";
 import LoadingSubmit from "../../Components/Loading/LoadingSubmit";
 import { User } from "../../Context/UserContext";
+import Cookies from "universal-cookie";
 
 export default function Footer() {
   const [description, setDescription] = useState("");
@@ -14,6 +15,8 @@ export default function Footer() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
+
+  const cookie = new Cookies();
 
   // Loading
 
@@ -76,7 +79,8 @@ export default function Footer() {
       setAccept(true);
       console.log(err);
       if (err.response.status === 401) {
-        setErrMsg("خطأ في عملية المصادقة");
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
       } else if (err.response.status === 422) {
         return null;
       } else {

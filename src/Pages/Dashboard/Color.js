@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../Api/Api";
 import { User } from "../../Context/UserContext";
+import Cookies from "universal-cookie";
 
 export default function Color() {
   const [color, setColor] = useState("#1f1f1f");
@@ -12,6 +13,8 @@ export default function Color() {
 
   //   Get Auth User
   const { auth } = useContext(User);
+
+  const cookie = new Cookies();
 
   //   Get Data
 
@@ -49,7 +52,8 @@ export default function Color() {
       setAccept(true);
 
       if (err.response.status === 401) {
-        setErrMsg("خطأ في عملية المصادقة");
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
       } else if (err.response.status === 422) {
         return null;
       } else {

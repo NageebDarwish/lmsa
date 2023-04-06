@@ -2,10 +2,13 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../Api/Api";
 import { User } from "../../Context/UserContext";
+import Cookies from "universal-cookie";
 
 export default function Map() {
   const [map, setMap] = useState("");
   const [mapShow, setMapShow] = useState([]);
+
+  const cookie = new Cookies();
 
   //   Err Msgs
   const [Aceept, setAccept] = useState(false);
@@ -46,7 +49,8 @@ export default function Map() {
       setAccept(true);
 
       if (err.response.status === 401) {
-        setErrMsg("خطأ في عملية المصادقة");
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
       } else if (err.response.status === 422) {
         return null;
       } else {

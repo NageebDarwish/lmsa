@@ -3,12 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../Api/Api";
 import { User } from "../../Context/UserContext";
 import LoadingSubmit from "./../../Components/Loading/LoadingSubmit";
+import Cookies from "universal-cookie";
 
 export default function Contact() {
   const [description, setDescription] = useState("");
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const cookie = new Cookies();
 
   // Loading
   const [loading, setLoading] = useState(false);
@@ -55,7 +58,8 @@ export default function Contact() {
       setAccept(true);
 
       if (err.response.status === 401) {
-        setErrMsg("خطأ في عملية المصادقة");
+        cookie.remove("Bearer");
+        window.location.pathname = "/dashboard";
       } else if (err.response.status === 422) {
         return null;
       } else {
