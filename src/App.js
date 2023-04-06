@@ -23,6 +23,7 @@ import { useEffect } from "react";
 import { baseUrl } from "./Api/Api";
 import Logout from "./Pages/Dashboard/logout";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
+import Service from "./Pages/Website/Service";
 
 function App() {
   useEffect(() => {
@@ -77,6 +78,7 @@ function App() {
           <Route path="" element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="services" element={<ServicesPage />} />
+          <Route path="service/:id" element={<Service />} />
           <Route path="gallery" element={<GalleryPage />} />
           <Route path="contact" element={<ContactUsPage />} />
         </Route>

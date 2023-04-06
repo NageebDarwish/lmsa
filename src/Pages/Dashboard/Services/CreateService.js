@@ -23,6 +23,7 @@ export default function CreateService() {
     formData.append("description", description);
     formData.append("icon", image);
     formData.append("best", special ? 1 : 0);
+
     try {
       await axios.post(`${baseUrl}/services`, formData, {
         headers: {
@@ -32,6 +33,7 @@ export default function CreateService() {
       });
       window.location.pathname = "/dashboard/services";
     } catch (err) {
+      console.log(err);
       setAccept(true);
       if (err.response.status === 401) {
         setErrMsg("خطأ في عملية المصادقة");
@@ -97,6 +99,7 @@ export default function CreateService() {
             <span className="err">يجب اختيار صورة</span>
           )}
         </div>
+
         <div className="form-check mt-3" style={{ width: "fit-content" }}>
           <input
             style={{ float: "right", marginLeft: "10px" }}

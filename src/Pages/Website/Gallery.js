@@ -18,6 +18,7 @@ export default function GalleryPage() {
   const [open, setOpen] = useState(false);
 
   const images = gallery.map((img) => ({ src: img.images, key: img.id }));
+  const [selectedIndex, setSelectedIndex] = useState(0); // new state variable
 
   // Services Content
 
@@ -60,7 +61,10 @@ export default function GalleryPage() {
               cursor: "pointer",
             }}
             className="gallery-img"
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              setOpen(true);
+              setSelectedIndex(key);
+            }}
           ></div>
         </div>
       );

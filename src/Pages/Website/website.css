@@ -67,9 +67,10 @@
 .btn-blue {
   background: #63d1e0 !important;
   color: black !important;
-  width: 80%;
+  width: 100%;
   padding: 15px 0;
   border-radius: 15px;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {

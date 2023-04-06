@@ -1,20 +1,12 @@
 import { useEffect, useState } from "react";
+import Services from "../../Components/Website/Services";
 import { baseUrl } from "./../../Api/Api";
 import LoadingWebsite from "./../../Components/Loading/LoadingWebsite";
 
 export default function ServicesPage() {
-  const [services, setSevices] = useState([]);
   const [servicesDescription, setServicesDescription] = useState("");
-  const [number, setNumber] = useState("");
+
   const [loading, setLoading] = useState(true);
-
-  // Services Content
-
-  useEffect(() => {
-    fetch(`${baseUrl}/services`)
-      .then((res) => res.json())
-      .then((data) => setSevices(data));
-  }, []);
 
   //   Service Description
   useEffect(() => {
@@ -26,48 +18,6 @@ export default function ServicesPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Get Number
-
-  useEffect(() => {
-    fetch(`${baseUrl}/footer`)
-      .then((res) => res.json())
-      .then((data) => {
-        setNumber(data[0].phone);
-      });
-  }, []);
-
-  // Render Services
-
-  const showServices = services.map((item, key) => (
-    <div key={key} className="col-12 col-sm-6 col-lg-3 my-2">
-      <div
-        className="d-flex align-items-center justify-content-between flex-column h-100 bg-white py-5 px-2 mx-2 custom-service-card"
-        style={{
-          boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
-          borderRadius: "22px",
-        }}
-      >
-        <div>
-          <div className="mb-4">
-            <img src={item.icon} alt="icon" width="100px" />
-          </div>
-          <h3 className="fw-bold mb-4" style={{ fontSize: "22px" }}>
-            {item.title}
-          </h3>
-          <p>{item.description}</p>
-        </div>
-        <a
-          href={`https://wa.me/${number}/?text=أريد طلب خدمة ${item.title}`}
-          rel="noreferrer"
-          target="_blank"
-          className="btn btn-blue mt-2"
-        >
-          طلب الخدمة
-        </a>
-      </div>
-    </div>
-  ));
-
   return (
     <div className="container-sm container-fluid">
       {loading ? (
@@ -78,9 +28,7 @@ export default function ServicesPage() {
             خدماتنا
           </h1>
           <p className="text-center fw-bold se-color">{servicesDescription}</p>
-          <div className="d-flex align-items-stretch justify-content-between text-center flex-wrap mt-5">
-            {showServices}
-          </div>
+          <Services />
         </section>
       )}
     </div>

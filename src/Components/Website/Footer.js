@@ -82,12 +82,12 @@ export default function Footer() {
                       <span> قناتنا على اليويتوب</span>
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href={social.twitter} className="text-white">
                       <i className="fa-brands fa-twitter"></i>
                       <span> صفحتنا على تويتر </span>
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

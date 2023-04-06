@@ -6,7 +6,6 @@ import Header from "../../Components/Website/Header";
 
 export default function Website() {
   useEffect(() => {
-    console.log("run");
     fetch(`${baseUrl}/tab`)
       .then((res) => res.json())
       .then((data) => {

@@ -4,7 +4,7 @@ import { User } from "./UserContext";
 
 export default function AuthRequire() {
   const userLogin = useContext(User);
-  console.log(userLogin);
+
   const location = useLocation();
 
   return userLogin?.auth?.Token ? (
