@@ -25,7 +25,7 @@ export default function UpdateService() {
 
   //   Get Service Images
   useEffect(() => {
-    fetch(`${baseUrl}/service-img/`)
+    fetch(`${baseUrl}/service-img`)
       .then((res) => res.json())
       .then((data) => {
         setServiceImages(data.filter((img) => img.service_id === id));
