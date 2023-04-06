@@ -14,8 +14,9 @@ export default function Service() {
   const [sketleton, setSketleton] = useState(true);
   const [number, setNumber] = useState("");
   const [open, setOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0); // new state variable
 
-  const images = service.map((img) => ({ src: img.image, key: img.id }));
+  const images = serviceImages.map((img) => ({ src: img.image }));
 
   const id = Number(window.location.pathname.split("/").slice(-1)[0]);
 
@@ -76,7 +77,10 @@ export default function Service() {
             cursor: "pointer",
           }}
           className="gallery-img"
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            setSelectedIndex(index);
+            setOpen(true);
+          }}
         ></div>
       </div>
     );
@@ -95,6 +99,7 @@ export default function Service() {
               onClick={() => setOpen(false)}
               close={() => setOpen(false)}
               slides={images}
+              index={selectedIndex}
               plugins={[Fullscreen, Slideshow]}
             />
           )}

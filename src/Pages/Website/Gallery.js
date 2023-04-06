@@ -17,8 +17,10 @@ export default function GalleryPage() {
 
   const [open, setOpen] = useState(false);
 
-  const images = gallery.map((img) => ({ src: img.images, key: img.id }));
+  const images = gallery.map((img) => ({ src: img.images }));
   const [selectedIndex, setSelectedIndex] = useState(0); // new state variable
+
+  console.log(selectedIndex);
 
   // Services Content
 
@@ -103,6 +105,7 @@ export default function GalleryPage() {
               onClick={() => setOpen(false)}
               close={() => setOpen(false)}
               slides={images}
+              index={selectedIndex}
               plugins={[Fullscreen, Slideshow]}
             />
           )}
