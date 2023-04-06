@@ -165,6 +165,14 @@ export default function HomePage() {
                 </h1>
                 <Services Best={true} />
               </section>
+              <div
+                style={{ width: "300px", margin: "0 auto" }}
+                className="mt-2"
+              >
+                <Link className="btn btn-blue mt-2 ms-1" to="/services">
+                  عرض كافة الخدمات
+                </Link>
+              </div>
             </div>
           </div>
         </>
